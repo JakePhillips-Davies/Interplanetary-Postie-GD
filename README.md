@@ -1,4 +1,18 @@
 
+# Interplanetary Postie
+
+Space sim game written in Godot 4.5, recompiled for large worlds.
+
+_________________________________________________________________
+
+Currently working features:
+
+. Patched conics with keplerian orbital mechanics
+
+. Simple planet terrain generation
+
+. Atmospheres and clouds (thanks to modified addon)
+
 ## Credits
 
 
