@@ -1,0 +1,79 @@
+[gd_scene load_steps=18 format=3 uid="uid://ddjssdk68c5dy"]
+
+[ext_resource type="PackedScene" uid="uid://cwfpm7ymd6j68" path="res://Scenes/CelestialSystems/CelestialObjectTemplate.tscn" id="1_tvwrh"]
+[ext_resource type="Texture2D" uid="uid://boo6o1xoohjvs" path="res://Assets/Textures/Celestial Bodies/The Moon/Height map/py.exr" id="3_eo4s8"]
+[ext_resource type="PackedScene" uid="uid://dr3gk0rmuiqtl" path="res://Scenes/CelestialSystems/Celestial Terrain/Terrain.tscn" id="4_fv7pd"]
+[ext_resource type="Texture2D" uid="uid://dbsoi6i74jrvm" path="res://Assets/Textures/Celestial Bodies/The Moon/Height map/ny.exr" id="4_s2y11"]
+[ext_resource type="Texture2D" uid="uid://bwyoay4ltugx2" path="res://Assets/Textures/Celestial Bodies/The Moon/Height map/px.exr" id="5_4qb8u"]
+[ext_resource type="Texture2D" uid="uid://bonu3g7oby53v" path="res://Assets/Textures/Celestial Bodies/The Moon/Height map/nx.exr" id="6_tl637"]
+[ext_resource type="Texture2D" uid="uid://bo1ykyswr7boj" path="res://Assets/Textures/Celestial Bodies/The Moon/Colour map/py.png" id="7_5n7g8"]
+[ext_resource type="Texture2D" uid="uid://vyyyffw7mtd8" path="res://Assets/Textures/Celestial Bodies/The Moon/Height map/pz.exr" id="7_6pgfe"]
+[ext_resource type="Texture2D" uid="uid://etse26a38icy" path="res://Assets/Textures/Celestial Bodies/The Moon/Height map/nz.exr" id="8_bld0w"]
+[ext_resource type="Texture2D" uid="uid://cl5et5y2yjol7" path="res://Assets/Textures/Celestial Bodies/The Moon/Colour map/ny.png" id="9_5rrl2"]
+[ext_resource type="Texture2D" uid="uid://b205c35ymfapd" path="res://Assets/Textures/Celestial Bodies/The Moon/Colour map/px.png" id="11_fv7pd"]
+[ext_resource type="Texture2D" uid="uid://dnc4mgdnpvjgv" path="res://Assets/Textures/Celestial Bodies/The Moon/Colour map/pz.png" id="12_1612g"]
+[ext_resource type="Texture2D" uid="uid://coejwnsw4nqe2" path="res://Assets/Textures/Celestial Bodies/The Moon/Colour map/nx.png" id="13_73p0g"]
+[ext_resource type="Texture2D" uid="uid://b3qnmvmsfyllb" path="res://Assets/Textures/Celestial Bodies/The Moon/Colour map/nz.png" id="17_3r7cl"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_6pgfe"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_ck28a"]
+size = Vector3(75, 800, 75)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_5n7g8"]
+noise_type = 3
+frequency = 0.0002
+fractal_octaves = 6
+fractal_lacunarity = 2.985
+fractal_gain = 0.51
+fractal_weighted_strength = 0.22
+
+[node name="The Moon" instance=ExtResource("1_tvwrh")]
+mass = 7.349e+22
+radius = 1.737e+06
+
+[node name="Random Stuff" type="Node3D" parent="-- Mesh comp --" index="0"]
+transform = Transform3D(0.987965, 0.153174, -0.021503, -0.0757145, 0.600141, 0.796303, 0.134878, -0.785092, 0.604516, 281817, 1.11712e+06, -1.30796e+06)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="-- Mesh comp --/Random Stuff" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.99, -128.991, 0.855)
+mesh = SubResource("CapsuleMesh_6pgfe")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="-- Mesh comp --/Random Stuff" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 41.15, 250.831, -14.967)
+mesh = SubResource("BoxMesh_ck28a")
+
+[node name="Terrain" parent="-- Mesh comp --" index="1" instance=ExtResource("4_fv7pd")]
+radius = 1.737e+06
+maxElevation = 18000.0
+noise = SubResource("FastNoiseLite_5n7g8")
+noiseGain = 100.0
+
+[node name="Temp focus" parent="-- Mesh comp --/Terrain" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 281817, 1.11712e+06, -1.30796e+06)
+
+[node name="Up +y" parent="-- Mesh comp --/Terrain" index="1"]
+heightmap = ExtResource("3_eo4s8")
+colourMap = ExtResource("7_5n7g8")
+
+[node name="Down -y" parent="-- Mesh comp --/Terrain" index="2"]
+heightmap = ExtResource("4_s2y11")
+colourMap = ExtResource("9_5rrl2")
+
+[node name="Right +x" parent="-- Mesh comp --/Terrain" index="3"]
+heightmap = ExtResource("5_4qb8u")
+colourMap = ExtResource("11_fv7pd")
+
+[node name="Left -x" parent="-- Mesh comp --/Terrain" index="4"]
+heightmap = ExtResource("6_tl637")
+colourMap = ExtResource("13_73p0g")
+
+[node name="Forward +z" parent="-- Mesh comp --/Terrain" index="5"]
+heightmap = ExtResource("7_6pgfe")
+colourMap = ExtResource("12_1612g")
+
+[node name="Back -z" parent="-- Mesh comp --/Terrain" index="6"]
+heightmap = ExtResource("8_bld0w")
+colourMap = ExtResource("17_3r7cl")
+
+[editable path="-- Mesh comp --/Terrain"]

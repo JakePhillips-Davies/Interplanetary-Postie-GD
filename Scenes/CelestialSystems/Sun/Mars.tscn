@@ -1,0 +1,70 @@
+[gd_scene load_steps=12 format=3 uid="uid://pqm26qx1dcsi"]
+
+[ext_resource type="PackedScene" uid="uid://cwfpm7ymd6j68" path="res://Scenes/CelestialSystems/CelestialObjectTemplate.tscn" id="1_pskwe"]
+[ext_resource type="Texture2D" uid="uid://vo6qllx37asj" path="res://Assets/Textures/Celestial Bodies/Mars/8k_mars.jpg" id="2_3hcuc"]
+[ext_resource type="PackedScene" uid="uid://c36velgas3n3k" path="res://addons/zylann.atmosphere/planet_atmosphere.tscn" id="3_53li0"]
+[ext_resource type="Shader" uid="uid://bphm2mm1msbed" path="res://addons/zylann.atmosphere/shaders/planet_atmosphere_clouds.gdshader" id="4_hsbdd"]
+[ext_resource type="Script" uid="uid://cprfqi73uw2kc" path="res://addons/zylann.atmosphere/noise_cubemap.gd" id="5_cqekh"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_53li0"]
+albedo_texture = ExtResource("2_3hcuc")
+
+[sub_resource type="SphereMesh" id="SphereMesh_pskwe"]
+material = SubResource("StandardMaterial3D_53li0")
+radius = 3.3899e+06
+height = 6.7798e+06
+radial_segments = 256
+rings = 128
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_hsbdd"]
+noise_type = 2
+frequency = 0.05
+
+[sub_resource type="NoiseTexture3D" id="NoiseTexture3D_cqekh"]
+width = 16
+height = 16
+depth = 16
+seamless = true
+noise = SubResource("FastNoiseLite_hsbdd")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_eq1iq"]
+seed = -2
+domain_warp_enabled = true
+domain_warp_amplitude = 90.0
+domain_warp_frequency = 0.015
+domain_warp_fractal_octaves = 7
+
+[sub_resource type="Cubemap" id="Cubemap_j6q2x"]
+script = ExtResource("5_cqekh")
+noise = SubResource("FastNoiseLite_eq1iq")
+resolution = 512
+scale = Vector3(100, 200, 100)
+metadata/_custom_type_script = "uid://cprfqi73uw2kc"
+
+[node name="Mars" instance=ExtResource("1_pskwe")]
+mass = 6.4171e+23
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="-- Mesh comp --" index="0"]
+mesh = SubResource("SphereMesh_pskwe")
+skeleton = NodePath("../..")
+
+[node name="PlanetAthmosphere" parent="-- Mesh comp --" index="1" instance=ExtResource("3_53li0")]
+planet_radius = 3.3899e+06
+atmosphere_height = 110000.0
+custom_shader = ExtResource("4_hsbdd")
+clouds_rotation_speed = 5.0
+force_fullscreen = true
+shader_params/u_density = 0.303
+shader_params/u_scattering_strength = 0.905
+shader_params/u_scattering_wavelengths = Vector3(640, 550, 500)
+shader_params/u_atmosphere_ambient_color = Color(0, 0, 0.002, 1)
+shader_params/u_cloud_density_scale = 5.365
+shader_params/u_cloud_bottom = 0.3
+shader_params/u_cloud_top = 0.45
+shader_params/u_cloud_blend = 1.0
+shader_params/u_cloud_shape_texture = SubResource("NoiseTexture3D_cqekh")
+shader_params/u_cloud_shape_invert = 1.0
+shader_params/u_cloud_coverage_bias = -0.1
+shader_params/u_cloud_shape_factor = 0.163
+shader_params/u_cloud_shape_scale = 0.0
+shader_params/u_cloud_coverage_cubemap = SubResource("Cubemap_j6q2x")

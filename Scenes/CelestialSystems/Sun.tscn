@@ -1,0 +1,66 @@
+[gd_scene load_steps=9 format=3 uid="uid://ckrdjydyrn7o8"]
+
+[ext_resource type="Script" uid="uid://mkxmwkwauxvu" path="res://Assets/Scripts/Physics/Celestial Simulation/Object/CelestialObject.cs" id="1_k1tav"]
+[ext_resource type="Script" uid="uid://7eh7kgpgmeg6" path="res://Assets/Scripts/Physics/Celestial Simulation/Object/Sunlight.gd" id="2_jhed0"]
+[ext_resource type="PackedScene" uid="uid://h4f2ayujy6k6" path="res://Scenes/CelestialSystems/Sun/Earth.tscn" id="2_o1fmj"]
+[ext_resource type="PackedScene" uid="uid://dgmgrf3ksi1wa" path="res://Scenes/CelestialSystems/Sun/Mercury.tscn" id="2_w4x13"]
+[ext_resource type="PackedScene" uid="uid://b6nahy5ymo07g" path="res://Scenes/CelestialSystems/Sun/Venus.tscn" id="3_tbu48"]
+[ext_resource type="PackedScene" uid="uid://pqm26qx1dcsi" path="res://Scenes/CelestialSystems/Sun/Mars.tscn" id="5_ywamr"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k1tav"]
+emission_enabled = true
+emission = Color(0.99, 0.94281, 0.7722, 1)
+emission_energy_multiplier = 10000.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_k1tav"]
+material = SubResource("StandardMaterial3D_k1tav")
+radius = 6.9634e+08
+height = 1.39268e+09
+
+[node name="The Sun" type="Node3D"]
+script = ExtResource("1_k1tav")
+mass = 1.989e+30
+
+[node name="-- Mesh comp --" type="Node" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_k1tav")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.169094, 0.874523, 0.454551, -0.985199, 0.163135, 0.0526352, -0.0281227, -0.456723, 0.889164, 0, 0, 1e+07)
+light_energy = 3.0
+shadow_enabled = true
+shadow_bias = 0.391
+shadow_blur = 2.262
+directional_shadow_split_1 = 0.001
+directional_shadow_split_2 = 0.008
+directional_shadow_split_3 = 0.097
+directional_shadow_blend_splits = true
+directional_shadow_max_distance = 50000.0
+sky_mode = 1
+script = ExtResource("2_jhed0")
+baseEnergy = 3.0
+
+[node name="-- Celestial comp --" type="Node" parent="."]
+
+[node name="-- Children --" type="Node" parent="."]
+
+[node name="Mercury" parent="." instance=ExtResource("2_w4x13")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.05313e+10, 5.91003e+09, -3.80519e+10)
+InitPos = Vector3(-3.05313e+10, 5.91003e+09, -3.80519e+10)
+InitVel = Vector3(-47844.5, 2053.87, 28565.9)
+
+[node name="Venus" parent="." instance=ExtResource("3_tbu48")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.48679e+10, -4.94336e+09, 8.73813e+10)
+InitPos = Vector3(6.48679e+10, -4.94336e+09, 8.73813e+10)
+InitVel = Vector3(27886.2, -1323.96, -20751)
+
+[node name="Earth" parent="." instance=ExtResource("2_o1fmj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.13642e+10, 9.37858e+06, 1.48571e+11)
+InitPos = Vector3(-3.13642e+10, 9.37858e+06, 1.48571e+11)
+InitVel = Vector3(28653.8, 0.732, 6257.75)
+
+[node name="Mars" parent="." instance=ExtResource("5_ywamr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.47075e+11, 6.10756e+09, -2.32258e+09)
+InitPos = Vector3(-2.47075e+11, 6.10756e+09, -2.32258e+09)
+InitVel = Vector3(676.508, -480.929, 22157.2)

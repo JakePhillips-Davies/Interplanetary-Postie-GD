@@ -1,0 +1,26 @@
+[remap]
+
+importer="cubemap_texture"
+type="CompressedCubemap"
+uid="uid://dujind58fslvp"
+path.bptc="res://.godot/imported/CloudMap.png-4ab2487a916219191159e83bfe55883d.bptc.ccube"
+metadata={
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
+}
+
+[deps]
+
+source_file="res://Assets/Textures/Celestial Bodies/Earth/CloudMap.png"
+dest_files=["res://.godot/imported/CloudMap.png-4ab2487a916219191159e83bfe55883d.bptc.ccube"]
+
+[params]
+
+compress/mode=2
+compress/high_quality=true
+compress/lossy_quality=0.7
+compress/hdr_compression=0
+compress/channel_pack=0
+mipmaps/generate=true
+mipmaps/limit=-1
+slices/arrangement=2

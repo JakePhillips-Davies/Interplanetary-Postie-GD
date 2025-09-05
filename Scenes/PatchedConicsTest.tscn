@@ -1,0 +1,105 @@
+[gd_scene load_steps=12 format=3 uid="uid://ds0ekht0koswo"]
+
+[ext_resource type="Texture2D" uid="uid://dglobcnmo7lhs" path="res://Assets/Textures/Skybox/starmap_2020_4k.exr" id="1_m7ua4"]
+[ext_resource type="Script" uid="uid://b51owwu0j1tn8" path="res://Assets/Scripts/Time/UniversalTimeSingleton.cs" id="1_pfusq"]
+[ext_resource type="PackedScene" uid="uid://brynevrx0vym4" path="res://Scenes/UI.tscn" id="3_prrob"]
+[ext_resource type="Script" uid="uid://dfe6ssgeoslyd" path="res://Assets/Scripts/Physics/Celestial Simulation/Orbit/OrbitSettingsSingleton.cs" id="3_qg0x7"]
+[ext_resource type="Script" uid="uid://ddueor1t7os8v" path="res://Scenes/OrbitCam.gd" id="4_2ltbh"]
+[ext_resource type="PackedScene" uid="uid://ckrdjydyrn7o8" path="res://Scenes/CelestialSystems/Sun.tscn" id="4_bwm5l"]
+[ext_resource type="Script" uid="uid://c5nedk2cp4jp6" path="res://Assets/Scripts/Physics/Celestial Simulation/universe.gd" id="5_prrob"]
+[ext_resource type="CameraAttributesPractical" uid="uid://b1gopvig3x42v" path="res://Assets/CameraSettings/MainCameraSettings.tres" id="7_bwm5l"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_qg0x7"]
+panorama = ExtResource("1_m7ua4")
+filter = false
+energy_multiplier = 0.1
+
+[sub_resource type="Sky" id="Sky_prrob"]
+sky_material = SubResource("PanoramaSkyMaterial_qg0x7")
+
+[sub_resource type="Environment" id="Environment_juf27"]
+background_mode = 2
+sky = SubResource("Sky_prrob")
+tonemap_mode = 3
+glow_enabled = true
+glow_levels/1 = 0.64
+glow_levels/2 = 1.23
+glow_levels/3 = 0.68
+glow_levels/4 = 0.27
+glow_levels/5 = 0.62
+glow_levels/6 = 0.07
+glow_levels/7 = 0.4
+glow_intensity = 0.43
+glow_bloom = 0.15
+glow_blend_mode = 1
+glow_hdr_threshold = 2.0
+volumetric_fog_density = 0.0305
+adjustment_enabled = true
+adjustment_contrast = 0.97
+
+[node name="Main" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_juf27")
+
+[node name="Time" type="Node" parent="."]
+script = ExtResource("1_pfusq")
+exponentialTimeScale = true
+
+[node name="Orbit Settings" type="Node" parent="."]
+script = ExtResource("3_qg0x7")
+showOrbits = false
+
+[node name="UI" parent="." instance=ExtResource("3_prrob")]
+
+[node name="-------------------------------------------------------------------------" type="Node" parent="."]
+
+[node name="Universe" type="Node3D" parent="." node_paths=PackedStringArray("floatingOrigin")]
+top_level = true
+script = ExtResource("5_prrob")
+floatingOrigin = NodePath("The Sun/Earth/The Moon/-- Mesh comp --/Random Stuff/Main cam")
+
+[node name="The Sun" parent="Universe" instance=ExtResource("4_bwm5l")]
+
+[node name="DirectionalLight3D" parent="Universe/The Sun" index="2"]
+transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, 0, 1e+07)
+
+[node name="A point in Wales" parent="Universe/The Sun/Earth/-- Mesh comp --" index="0"]
+transform = Transform3D(0.999451, 0.0331553, 3.15175e-08, -0.014742, 0.444391, 0.895712, 0.0296975, -0.89522, 0.444635, 226653, 2.82681e+06, -5.71303e+06)
+
+[node name="Atmosphere" parent="Universe/The Sun/Earth/-- Mesh comp --" index="1"]
+shader_params/u_atmosphere_ambient_color = Color(0, 0, 0.002, 1)
+shader_params/u_cloud_density_scale = 50.0
+shader_params/u_cloud_bottom = 0.2
+shader_params/u_cloud_top = 0.5
+shader_params/u_cloud_blend = 0.5
+shader_params/u_cloud_shape_texture = null
+shader_params/u_cloud_shape_invert = 0.0
+shader_params/u_cloud_coverage_bias = 0.0
+shader_params/u_cloud_shape_factor = 0.8
+shader_params/u_cloud_shape_scale = 1.0
+shader_params/u_cloud_coverage_cubemap = null
+
+[node name="Main cam" type="Camera3D" parent="Universe/The Sun/Earth/The Moon/-- Mesh comp --/Random Stuff" index="0"]
+transform = Transform3D(1, 0, 0, 0, 0.999999, 0, 0, 0, 1, 0, 0, 0)
+attributes = ExtResource("7_bwm5l")
+size = 0.054
+far = 1e+12
+script = ExtResource("4_2ltbh")
+sensitivity = 0.206
+
+[node name="Terrain" parent="Universe/The Sun/Earth/The Moon/-- Mesh comp --" index="1" node_paths=PackedStringArray("focus")]
+focus = NodePath("../Random Stuff/Main cam")
+
+[node name="Jeff" parent="Universe/The Sun/Earth" index="5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 226683, 2.82721e+06, -5.71384e+06)
+InitPos = Vector3(226683, 2.82721e+06, -5.71384e+06)
+
+[editable path="Universe/The Sun"]
+[editable path="Universe/The Sun/Mercury"]
+[editable path="Universe/The Sun/Venus"]
+[editable path="Universe/The Sun/Earth"]
+[editable path="Universe/The Sun/Earth/The Moon"]
+[editable path="Universe/The Sun/Earth/The Moon/-- Mesh comp --/Terrain"]
+[editable path="Universe/The Sun/Earth/StationA"]
+[editable path="Universe/The Sun/Mars"]

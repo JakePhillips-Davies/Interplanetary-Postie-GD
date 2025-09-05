@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://b6nahy5ymo07g"]
+
+[ext_resource type="PackedScene" uid="uid://cwfpm7ymd6j68" path="res://Scenes/CelestialSystems/CelestialObjectTemplate.tscn" id="1_l5ql6"]
+[ext_resource type="Texture2D" uid="uid://cjcp6ui16dif1" path="res://Assets/Textures/Celestial Bodies/Venus/8k_venus_surface.jpg" id="2_a0cou"]
+[ext_resource type="PackedScene" uid="uid://c36velgas3n3k" path="res://addons/zylann.atmosphere/planet_atmosphere.tscn" id="3_kbarm"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kbarm"]
+albedo_texture = ExtResource("2_a0cou")
+
+[sub_resource type="SphereMesh" id="SphereMesh_l5ql6"]
+material = SubResource("StandardMaterial3D_kbarm")
+radius = 6.051e+06
+height = 1.2102e+07
+radial_segments = 256
+rings = 128
+
+[node name="Venus" instance=ExtResource("1_l5ql6")]
+mass = 4.8685e+24
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="-- Mesh comp --" index="0"]
+mesh = SubResource("SphereMesh_l5ql6")
+skeleton = NodePath("../..")
+
+[node name="PlanetAthmosphere" parent="-- Mesh comp --" index="1" instance=ExtResource("3_kbarm")]
+planet_radius = 6.051e+06
+atmosphere_height = 250000.0
+force_fullscreen = true
+shader_params/u_density = 1.144
+shader_params/u_scattering_strength = 0.17
+shader_params/u_scattering_wavelengths = Vector3(636.08, 684.445, 742.53)
+shader_params/u_atmosphere_modulate = Color(1, 0.989, 0.78, 1)
+shader_params/u_atmosphere_ambient_color = Color(0.06, 0.04086, 0.0252, 1)

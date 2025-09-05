@@ -1,0 +1,54 @@
+[gd_scene load_steps=5 format=3 uid="uid://dr3gk0rmuiqtl"]
+
+[ext_resource type="Script" uid="uid://8m5r325b5rm5" path="res://Assets/Scripts/Terrain/CelestialTerrain.cs" id="1_waqga"]
+[ext_resource type="Script" uid="uid://5njix5qmou8c" path="res://Assets/Scripts/Terrain/Quadtree/CelestialTerrainFace.cs" id="2_j5lf1"]
+[ext_resource type="Material" uid="uid://cxolye5ntba8t" path="res://Scenes/CelestialSystems/Celestial Terrain/TerrainBaseMat.tres" id="2_ycm6x"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_waqga"]
+noise_type = 3
+fractal_type = 3
+fractal_octaves = 6
+fractal_lacunarity = 2.92
+fractal_gain = 0.69
+fractal_weighted_strength = 0.31
+
+[node name="Terrain" type="Node3D" node_paths=PackedStringArray("focus")]
+script = ExtResource("1_waqga")
+radius = 500.0
+maxElevation = 10.0
+focus = NodePath("Temp focus")
+noise = SubResource("FastNoiseLite_waqga")
+noiseGain = 1.0
+material = ExtResource("2_ycm6x")
+
+[node name="Temp focus" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -545.414)
+
+[node name="Up +y" type="Node3D" parent="." node_paths=PackedStringArray("celestialTerrain")]
+script = ExtResource("2_j5lf1")
+celestialTerrain = NodePath("..")
+
+[node name="Down -y" type="Node3D" parent="." node_paths=PackedStringArray("celestialTerrain")]
+script = ExtResource("2_j5lf1")
+celestialTerrain = NodePath("..")
+faceDirection = 1
+
+[node name="Right +x" type="Node3D" parent="." node_paths=PackedStringArray("celestialTerrain")]
+script = ExtResource("2_j5lf1")
+celestialTerrain = NodePath("..")
+faceDirection = 2
+
+[node name="Left -x" type="Node3D" parent="." node_paths=PackedStringArray("celestialTerrain")]
+script = ExtResource("2_j5lf1")
+celestialTerrain = NodePath("..")
+faceDirection = 3
+
+[node name="Forward +z" type="Node3D" parent="." node_paths=PackedStringArray("celestialTerrain")]
+script = ExtResource("2_j5lf1")
+celestialTerrain = NodePath("..")
+faceDirection = 4
+
+[node name="Back -z" type="Node3D" parent="." node_paths=PackedStringArray("celestialTerrain")]
+script = ExtResource("2_j5lf1")
+celestialTerrain = NodePath("..")
+faceDirection = 5

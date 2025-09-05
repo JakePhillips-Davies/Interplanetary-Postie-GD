@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://4yehi5ry7ty3"]
+
+[ext_resource type="PackedScene" uid="uid://cwfpm7ymd6j68" path="res://Scenes/CelestialSystems/CelestialObjectTemplate.tscn" id="1_phydi"]
+
+[sub_resource type="PrismMesh" id="PrismMesh_phydi"]
+size = Vector3(9000, 19000, 600)
+
+[node name="Executor" instance=ExtResource("1_phydi")]
+mass = 2.5e+12
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="-- Mesh comp --" index="0"]
+transform = Transform3D(0.931202, 2.77556e-17, -0.364503, -0.139242, 0.92416, -0.355725, 0.336859, 0.382006, 0.86058, 192.19, -65.4715, 154.82)
+mesh = SubResource("PrismMesh_phydi")
+skeleton = NodePath("../..")

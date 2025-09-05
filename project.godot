@@ -1,0 +1,64 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="Interplanetary-Postie-GD"
+run/main_scene="uid://ds0ekht0koswo"
+config/features=PackedStringArray("4.5", "C#", "Double Precision", "Forward Plus")
+config/icon="res://icon.svg"
+
+[debug_draw_3d]
+
+settings/addon_root_folder="res://addons/debug_draw_3d"
+
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+window/vsync/vsync_mode=0
+
+[dotnet]
+
+project/assembly_name="Interplanetary-Postie-GD"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/zylann.atmosphere/tools/plugin.cfg")
+
+[file_customization]
+
+folder_colors={
+"res://Assets/Meshes/": "orange",
+"res://Assets/Scripts/": "green",
+"res://Assets/Textures/": "blue",
+"res://Scenes/": "red"
+}
+
+[input]
+
+Interact={
+"deadzone": 0.2,
+"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":0,"position":Vector2(0, 0),"global_position":Vector2(0, 0),"factor":1.0,"button_index":2,"canceled":false,"pressed":false,"double_click":false,"script":null)
+]
+}
+
+[physics]
+
+common/physics_ticks_per_second=50
+3d/physics_engine="Jolt Physics"
+3d/default_gravity=0.0
+3d/default_gravity_vector=Vector3(0, 0, 0)
+
+[rendering]
+
+lights_and_shadows/directional_shadow/size=2048
+lights_and_shadows/directional_shadow/soft_shadow_filter_quality=3
+anti_aliasing/quality/msaa_3d=1

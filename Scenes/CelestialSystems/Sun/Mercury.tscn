@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3 uid="uid://dgmgrf3ksi1wa"]
+
+[ext_resource type="PackedScene" uid="uid://cwfpm7ymd6j68" path="res://Scenes/CelestialSystems/CelestialObjectTemplate.tscn" id="1_u0i62"]
+[ext_resource type="Texture2D" uid="uid://cuoa1fqnw1eo2" path="res://Assets/Textures/Celestial Bodies/Mercury/8k_mercury.jpg" id="2_6qn82"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7xcwg"]
+albedo_texture = ExtResource("2_6qn82")
+
+[sub_resource type="SphereMesh" id="SphereMesh_u0i62"]
+material = SubResource("StandardMaterial3D_7xcwg")
+radius = 2.439e+06
+height = 4.878e+06
+
+[node name="Mercury" instance=ExtResource("1_u0i62")]
+mass = 3.302e+23
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="-- Mesh comp --" index="0"]
+mesh = SubResource("SphereMesh_u0i62")
+skeleton = NodePath("../..")

@@ -1,0 +1,42 @@
+[gd_scene load_steps=8 format=3 uid="uid://h4f2ayujy6k6"]
+
+[ext_resource type="PackedScene" uid="uid://cwfpm7ymd6j68" path="res://Scenes/CelestialSystems/CelestialObjectTemplate.tscn" id="1_po7y1"]
+[ext_resource type="PackedScene" uid="uid://c36velgas3n3k" path="res://addons/zylann.atmosphere/planet_atmosphere.tscn" id="2_1nl5e"]
+[ext_resource type="PackedScene" uid="uid://ddjssdk68c5dy" path="res://Scenes/CelestialSystems/Sun/Earth/The_Moon.tscn" id="2_w7wlv"]
+[ext_resource type="PackedScene" uid="uid://dtdx66cwvjkbf" path="res://Scenes/CelestialSystems/Sun/Earth/station_a.tscn" id="3_ri51n"]
+[ext_resource type="Shader" uid="uid://bphm2mm1msbed" path="res://addons/zylann.atmosphere/shaders/planet_atmosphere_clouds.gdshader" id="5_6tkvk"]
+[ext_resource type="PackedScene" uid="uid://4yehi5ry7ty3" path="res://Scenes/CelestialSystems/Sun/Earth/executor.tscn" id="9_npdty"]
+[ext_resource type="PackedScene" uid="uid://juxj4w7uwvr6" path="res://Scenes/CelestialSystems/Sun/Earth/jeff.tscn" id="21_ydrea"]
+
+[node name="Earth" instance=ExtResource("1_po7y1")]
+mass = 5.972e+24
+
+[node name="A point in Wales" type="Node3D" parent="-- Mesh comp --" index="0"]
+transform = Transform3D(0.99945, 0.0331552, 0, -0.014742, 0.444391, 0.895712, 0.0296975, -0.89522, 0.444635, 226653, 2.82681e+06, -5.71303e+06)
+
+[node name="Atmosphere" parent="-- Mesh comp --" index="1" instance=ExtResource("2_1nl5e")]
+transform = Transform3D(-0.0323493, -0.397148, -0.917184, -0.0139988, 0.917755, -0.396901, 0.999379, 0, -0.0352483, 0, 0, 0)
+planet_radius = 6.37814e+06
+atmosphere_height = 120000.0
+custom_shader = ExtResource("5_6tkvk")
+clouds_rotation_speed = 3.6
+force_fullscreen = true
+
+[node name="The Moon" parent="." index="2" instance=ExtResource("2_w7wlv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.44304e+08, -2.98979e+07, 3.1476e+08)
+InitPos = Vector3(-2.44304e+08, -2.98979e+07, 3.1476e+08)
+InitVel = Vector3(770.723, -42.02, 575.002)
+
+[node name="StationA" parent="." index="3" instance=ExtResource("3_ri51n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17, 400237, -6.53098e+06)
+InitPos = Vector3(-17, 400237, -6.53098e+06)
+InitVel = Vector3(10000, -4000, 1.995)
+
+[node name="Executor" parent="." index="4" instance=ExtResource("9_npdty")]
+InitPos = Vector3(-10.675, 12.375, -6.53098e+06)
+InitVel = Vector3(8000, -0.765, 0.5)
+
+[node name="Jeff" parent="." index="5" instance=ExtResource("21_ydrea")]
+transform = Transform3D(0.99945, 0.0331552, 3.15175e-08, -0.014742, 0.444391, 0.895712, 0.0296975, -0.895219, 0.444635, 226683, 2.82721e+06, -5.71384e+06)
+InitPos = Vector3(226653, 2.82681e+06, -5.71303e+06)
+InitVel = Vector3(20, 5, 0)

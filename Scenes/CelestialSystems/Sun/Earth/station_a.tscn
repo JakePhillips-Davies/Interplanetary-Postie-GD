@@ -1,0 +1,42 @@
+[gd_scene load_steps=6 format=3 uid="uid://dtdx66cwvjkbf"]
+
+[ext_resource type="PackedScene" uid="uid://cwfpm7ymd6j68" path="res://Scenes/CelestialSystems/CelestialObjectTemplate.tscn" id="1_fwtak"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_fwtak"]
+size = Vector3(6.185, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_baayy"]
+size = Vector3(6.185, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_h6tnp"]
+size = Vector3(6.185, 1, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_fwtak"]
+radius = 0.44
+height = 1.69
+
+[node name="StationA" instance=ExtResource("1_fwtak")]
+mass = 3200.0
+
+[node name="Node3D" type="Node3D" parent="-- Mesh comp --" index="0"]
+transform = Transform3D(5.25855, 0.587971, -1.62425, 0, 5.20449, 1.884, 1.7274, -1.7899, 4.94455, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="-- Mesh comp --/Node3D" index="0"]
+transform = Transform3D(12.5366, 0, 0, 0, 10.5335, 0, 0, 0, 20.6034, 2.22125, -4.77263, 0)
+mesh = SubResource("BoxMesh_fwtak")
+skeleton = NodePath("../../../..")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="-- Mesh comp --/Node3D" index="1"]
+transform = Transform3D(5.18263, 0, 0, 0, 5.47806, 0, 0, 0, 6.19295, -14.996, 6.88157, 0)
+mesh = SubResource("BoxMesh_baayy")
+skeleton = NodePath("../../../..")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="-- Mesh comp --/Node3D" index="2"]
+transform = Transform3D(0.536304, -6.42545, 0, 0.405161, 8.50522, 0, 0, 0, 2.8982, -17.4373, 1.36508, 0)
+mesh = SubResource("BoxMesh_h6tnp")
+skeleton = NodePath("../../../..")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="-- Mesh comp --/Node3D" index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5405, 1.28735, 0)
+mesh = SubResource("CapsuleMesh_fwtak")
+skeleton = NodePath("../../../..")

@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://cwfpm7ymd6j68"]
+
+[ext_resource type="Script" uid="uid://mkxmwkwauxvu" path="res://Assets/Scripts/Physics/Celestial Simulation/Object/CelestialObject.cs" id="1_s5rtw"]
+[ext_resource type="Script" uid="uid://b6hq8g1ndfehe" path="res://Assets/Scripts/Physics/Celestial Simulation/Orbit/OrbitDriver.cs" id="2_jk6kl"]
+[ext_resource type="Script" uid="uid://bgsr4ljrbv1oa" path="res://Assets/Scripts/Physics/Celestial Simulation/Orbit Display/OrbitDisplay.cs" id="3_6wcgk"]
+
+[node name="CelestialObject" type="Node3D" node_paths=PackedStringArray("orbitDriver", "orbitDisplay")]
+script = ExtResource("1_s5rtw")
+orbitDriver = NodePath("-- Celestial comp --/OrbitDriver")
+orbitDisplay = NodePath("-- Celestial comp --/OrbitDisplay")
+
+[node name="-- Celestial comp --" type="Node3D" parent="."]
+
+[node name="OrbitDriver" type="Node" parent="-- Celestial comp --" node_paths=PackedStringArray("celestialObject")]
+script = ExtResource("2_jk6kl")
+celestialObject = NodePath("../..")
+
+[node name="OrbitDisplay" type="Node" parent="-- Celestial comp --" node_paths=PackedStringArray("celestialObject")]
+script = ExtResource("3_6wcgk")
+celestialObject = NodePath("../..")
+lineCol = Color(0.8924, 0.90896, 0.92, 1)
+
+[node name="-- Mesh comp --" type="Node3D" parent="."]

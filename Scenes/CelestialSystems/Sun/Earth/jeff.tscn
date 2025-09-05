@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://juxj4w7uwvr6"]
+
+[ext_resource type="PackedScene" uid="uid://cwfpm7ymd6j68" path="res://Scenes/CelestialSystems/CelestialObjectTemplate.tscn" id="1_lfx3k"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lfx3k"]
+emission_enabled = true
+emission = Color(1, 0.412333, 0.14, 1)
+emission_energy_multiplier = 3.0
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_lfx3k"]
+material = SubResource("StandardMaterial3D_lfx3k")
+radius = 5.0
+height = 20.0
+
+[node name="Jeff" instance=ExtResource("1_lfx3k")]
+mass = 60.0
+
+[node name="OrbitDisplay" parent="-- Celestial comp --" index="1"]
+lineCol = Color(1, 0.426667, 0.14, 1)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="-- Mesh comp --" index="0"]
+transform = Transform3D(0.99945, 0.0331552, 3.15175e-08, -0.014742, 0.444391, 0.895712, 0.0296975, -0.895219, 0.444635, 0, 0, 0)
+mesh = SubResource("CapsuleMesh_lfx3k")
