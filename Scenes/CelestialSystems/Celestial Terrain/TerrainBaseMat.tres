@@ -18,6 +18,7 @@ detail_blend_mode = 3
 detail_uv_layer = 1
 detail_albedo = SubResource("NoiseTexture2D_4q635")
 uv2_triplanar_sharpness = 0.482968
+texture_filter = 0
 texture_repeat = false
 proximity_fade_distance = 4096.0
 distance_fade_min_distance = 2048.0

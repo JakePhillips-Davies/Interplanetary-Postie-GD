@@ -204,7 +204,7 @@ public partial class TerrainChunk : MeshInstance3D
 
 		FastNoiseLite noise = celestialTerrain.noise;
 
-		int     resolution = 32;
+		int     resolution = 16;
 		Vector3 surfacePoint;
 		Vector2 quadPoint;
 		Vector2 cubemapPoint;

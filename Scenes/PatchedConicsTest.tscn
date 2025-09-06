@@ -44,11 +44,12 @@ environment = SubResource("Environment_juf27")
 
 [node name="Time" type="Node" parent="."]
 script = ExtResource("1_pfusq")
+timeScale = 14
 exponentialTimeScale = true
 
 [node name="Orbit Settings" type="Node" parent="."]
 script = ExtResource("3_qg0x7")
-showOrbits = false
+showSoi = true
 
 [node name="UI" parent="." instance=ExtResource("3_prrob")]
 
@@ -57,48 +58,56 @@ showOrbits = false
 [node name="Universe" type="Node3D" parent="." node_paths=PackedStringArray("floatingOrigin")]
 top_level = true
 script = ExtResource("5_prrob")
-floatingOrigin = NodePath("The Sun/Earth/The Moon/-- Mesh comp --/Random Stuff/Main cam")
+floatingOrigin = NodePath("The Sun/Earth/-- Mesh comp --/A point in Wales/Main cam")
 
 [node name="The Sun" parent="Universe" instance=ExtResource("4_bwm5l")]
 
 [node name="DirectionalLight3D" parent="Universe/The Sun" index="2"]
 transform = Transform3D(-1, 0, 1.22465e-16, 0, 1, 0, -1.22465e-16, 0, -1, 0, 0, 1e+07)
 
+[node name="PlanetAthmosphere" parent="Universe/The Sun/Venus/-- Mesh comp --" index="1"]
+sun_path = NodePath("../../../DirectionalLight3D")
+
 [node name="A point in Wales" parent="Universe/The Sun/Earth/-- Mesh comp --" index="0"]
 transform = Transform3D(0.999451, 0.0331553, 3.15175e-08, -0.014742, 0.444391, 0.895712, 0.0296975, -0.89522, 0.444635, 226653, 2.82681e+06, -5.71303e+06)
 
-[node name="Atmosphere" parent="Universe/The Sun/Earth/-- Mesh comp --" index="1"]
-shader_params/u_atmosphere_ambient_color = Color(0, 0, 0.002, 1)
-shader_params/u_cloud_density_scale = 50.0
-shader_params/u_cloud_bottom = 0.2
-shader_params/u_cloud_top = 0.5
-shader_params/u_cloud_blend = 0.5
-shader_params/u_cloud_shape_texture = null
-shader_params/u_cloud_shape_invert = 0.0
-shader_params/u_cloud_coverage_bias = 0.0
-shader_params/u_cloud_shape_factor = 0.8
-shader_params/u_cloud_shape_scale = 1.0
-shader_params/u_cloud_coverage_cubemap = null
-
-[node name="Main cam" type="Camera3D" parent="Universe/The Sun/Earth/The Moon/-- Mesh comp --/Random Stuff" index="0"]
-transform = Transform3D(1, 0, 0, 0, 0.999999, 0, 0, 0, 1, 0, 0, 0)
+[node name="Main cam" type="Camera3D" parent="Universe/The Sun/Earth/-- Mesh comp --/A point in Wales" index="0"]
+transform = Transform3D(0.999999, 0, 0, 0, 1, 0, 0, 0, 0.999999, 0, 0, 0)
 attributes = ExtResource("7_bwm5l")
+fov = 99.2
 size = 0.054
 far = 1e+12
 script = ExtResource("4_2ltbh")
 sensitivity = 0.206
 
+[node name="Atmosphere" parent="Universe/The Sun/Earth/-- Mesh comp --" index="1"]
+sun_path = NodePath("../../../DirectionalLight3D")
+
+[node name="Terrain2" parent="Universe/The Sun/Earth/-- Mesh comp --" index="2" node_paths=PackedStringArray("focus")]
+focus = NodePath("../A point in Wales/Main cam")
+
+[node name="Temp focus" parent="Universe/The Sun/Earth/-- Mesh comp --/Terrain2" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 224186, 2.78482e+06, -5.73485e+06)
+
 [node name="Terrain" parent="Universe/The Sun/Earth/The Moon/-- Mesh comp --" index="1" node_paths=PackedStringArray("focus")]
-focus = NodePath("../Random Stuff/Main cam")
+focus = NodePath("../../../-- Mesh comp --/A point in Wales/Main cam")
+
+[node name="Executor" parent="Universe/The Sun/Earth" index="4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.675, 12.375, -6.53098e+06)
+InitVel = Vector3(10930, -1000, 0.5)
 
 [node name="Jeff" parent="Universe/The Sun/Earth" index="5"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 226683, 2.82721e+06, -5.71384e+06)
 InitPos = Vector3(226683, 2.82721e+06, -5.71384e+06)
 
+[node name="PlanetAthmosphere" parent="Universe/The Sun/Mars/-- Mesh comp --" index="1"]
+sun_path = NodePath("../../../DirectionalLight3D")
+
 [editable path="Universe/The Sun"]
 [editable path="Universe/The Sun/Mercury"]
 [editable path="Universe/The Sun/Venus"]
 [editable path="Universe/The Sun/Earth"]
+[editable path="Universe/The Sun/Earth/-- Mesh comp --/Terrain2"]
 [editable path="Universe/The Sun/Earth/The Moon"]
 [editable path="Universe/The Sun/Earth/The Moon/-- Mesh comp --/Terrain"]
 [editable path="Universe/The Sun/Earth/StationA"]

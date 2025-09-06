@@ -1,26 +1,97 @@
-[gd_scene load_steps=8 format=3 uid="uid://h4f2ayujy6k6"]
+[gd_scene load_steps=23 format=3 uid="uid://h4f2ayujy6k6"]
 
 [ext_resource type="PackedScene" uid="uid://cwfpm7ymd6j68" path="res://Scenes/CelestialSystems/CelestialObjectTemplate.tscn" id="1_po7y1"]
 [ext_resource type="PackedScene" uid="uid://c36velgas3n3k" path="res://addons/zylann.atmosphere/planet_atmosphere.tscn" id="2_1nl5e"]
+[ext_resource type="PackedScene" uid="uid://dr3gk0rmuiqtl" path="res://Scenes/CelestialSystems/Celestial Terrain/Terrain.tscn" id="2_44hap"]
 [ext_resource type="PackedScene" uid="uid://ddjssdk68c5dy" path="res://Scenes/CelestialSystems/Sun/Earth/The_Moon.tscn" id="2_w7wlv"]
+[ext_resource type="Texture2D" uid="uid://brxc4u7is8tbv" path="res://Assets/Textures/Celestial Bodies/Earth/Colour map/py.png" id="3_bllkw"]
 [ext_resource type="PackedScene" uid="uid://dtdx66cwvjkbf" path="res://Scenes/CelestialSystems/Sun/Earth/station_a.tscn" id="3_ri51n"]
 [ext_resource type="Shader" uid="uid://bphm2mm1msbed" path="res://addons/zylann.atmosphere/shaders/planet_atmosphere_clouds.gdshader" id="5_6tkvk"]
+[ext_resource type="Texture2D" uid="uid://npskipabbcs4" path="res://Assets/Textures/Celestial Bodies/Earth/Height map/py.exr" id="6_ydrea"]
+[ext_resource type="Texture2D" uid="uid://c8cpdqi0o7h08" path="res://Assets/Textures/Celestial Bodies/Earth/Height map/ny.exr" id="8_a67oh"]
+[ext_resource type="Texture2D" uid="uid://dqpkp11wgj6i" path="res://Assets/Textures/Celestial Bodies/Earth/Colour map/ny.png" id="9_n55k4"]
 [ext_resource type="PackedScene" uid="uid://4yehi5ry7ty3" path="res://Scenes/CelestialSystems/Sun/Earth/executor.tscn" id="9_npdty"]
+[ext_resource type="Texture2D" uid="uid://ch0mr3nqwru5y" path="res://Assets/Textures/Celestial Bodies/Earth/Height map/px.exr" id="10_yub6l"]
+[ext_resource type="Cubemap" uid="uid://bvrm472t22gvm" path="res://Assets/Textures/Celestial Bodies/Earth/CloudMapNoiseSettings.tres" id="11_cr4vq"]
+[ext_resource type="Texture2D" uid="uid://84nud84d40tb" path="res://Assets/Textures/Celestial Bodies/Earth/Colour map/px.png" id="11_wyycx"]
+[ext_resource type="Texture2D" uid="uid://b3s0lmnyjqoyi" path="res://Assets/Textures/Celestial Bodies/Earth/Height map/nx.exr" id="12_ksmt0"]
+[ext_resource type="Texture2D" uid="uid://cmsc1m2g7t35i" path="res://Assets/Textures/Celestial Bodies/Earth/Colour map/nx.png" id="13_oyo7j"]
+[ext_resource type="Texture2D" uid="uid://bv72ssfkm8vwr" path="res://Assets/Textures/Celestial Bodies/Earth/Height map/pz.exr" id="14_dqw0d"]
+[ext_resource type="Texture2D" uid="uid://21lcw75xna60" path="res://Assets/Textures/Celestial Bodies/Earth/Colour map/pz.png" id="15_1hlyt"]
+[ext_resource type="Texture2D" uid="uid://crfilyxhyftyg" path="res://Assets/Textures/Celestial Bodies/Earth/Height map/nz.exr" id="16_mphxp"]
+[ext_resource type="Texture2D" uid="uid://ct54vdktut2m8" path="res://Assets/Textures/Celestial Bodies/Earth/Colour map/nz.png" id="17_whcvx"]
 [ext_resource type="PackedScene" uid="uid://juxj4w7uwvr6" path="res://Scenes/CelestialSystems/Sun/Earth/jeff.tscn" id="21_ydrea"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ydrea"]
+noise_type = 3
+frequency = 0.0002
+fractal_type = 3
+fractal_octaves = 10
+fractal_lacunarity = 1.14
+fractal_gain = 0.965
+fractal_weighted_strength = 0.43
+fractal_ping_pong_strength = 2.76
 
 [node name="Earth" instance=ExtResource("1_po7y1")]
 mass = 5.972e+24
 
 [node name="A point in Wales" type="Node3D" parent="-- Mesh comp --" index="0"]
-transform = Transform3D(0.99945, 0.0331552, 0, -0.014742, 0.444391, 0.895712, 0.0296975, -0.89522, 0.444635, 226653, 2.82681e+06, -5.71303e+06)
+transform = Transform3D(0.99945, 0.0331552, 0, -0.014742, 0.444391, 0.895712, 0.0296975, -0.89522, 0.444635, 224186, 2.78482e+06, -5.73485e+06)
 
 [node name="Atmosphere" parent="-- Mesh comp --" index="1" instance=ExtResource("2_1nl5e")]
-transform = Transform3D(-0.0323493, -0.397148, -0.917184, -0.0139988, 0.917755, -0.396901, 0.999379, 0, -0.0352483, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 0.917755, 0.397148, 0, -0.397148, 0.917754, 0, 0, 0)
 planet_radius = 6.37814e+06
 atmosphere_height = 120000.0
 custom_shader = ExtResource("5_6tkvk")
 clouds_rotation_speed = 3.6
 force_fullscreen = true
+shader_params/u_density = 0.66
+shader_params/u_scattering_strength = 0.15
+shader_params/u_atmosphere_ambient_color = Color(0, 0, 0.002, 1)
+shader_params/u_cloud_density_scale = 7.975
+shader_params/u_cloud_bottom = 0.1
+shader_params/u_cloud_top = 0.365
+shader_params/u_cloud_blend = 0.5
+shader_params/u_cloud_shape_texture = null
+shader_params/u_cloud_shape_invert = 0.0
+shader_params/u_cloud_coverage_bias = -0.085
+shader_params/u_cloud_shape_factor = 0.94
+shader_params/u_cloud_shape_scale = 1.0
+shader_params/u_cloud_coverage_cubemap = ExtResource("11_cr4vq")
+
+[node name="Terrain2" parent="-- Mesh comp --" index="2" instance=ExtResource("2_44hap")]
+radius = 6.36714e+06
+maxElevation = 55000.0
+axialTilt = -23.4
+noise = SubResource("FastNoiseLite_ydrea")
+noiseGain = 400.0
+
+[node name="Temp focus" parent="-- Mesh comp --/Terrain2" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 224186, 2.78482e+06, -5.73485e+06)
+
+[node name="Up +y" parent="-- Mesh comp --/Terrain2" index="1"]
+heightmap = ExtResource("6_ydrea")
+colourMap = ExtResource("3_bllkw")
+
+[node name="Down -y" parent="-- Mesh comp --/Terrain2" index="2"]
+heightmap = ExtResource("8_a67oh")
+colourMap = ExtResource("9_n55k4")
+
+[node name="Right +x" parent="-- Mesh comp --/Terrain2" index="3"]
+heightmap = ExtResource("10_yub6l")
+colourMap = ExtResource("11_wyycx")
+
+[node name="Left -x" parent="-- Mesh comp --/Terrain2" index="4"]
+heightmap = ExtResource("12_ksmt0")
+colourMap = ExtResource("13_oyo7j")
+
+[node name="Forward +z" parent="-- Mesh comp --/Terrain2" index="5"]
+heightmap = ExtResource("14_dqw0d")
+colourMap = ExtResource("15_1hlyt")
+
+[node name="Back -z" parent="-- Mesh comp --/Terrain2" index="6"]
+heightmap = ExtResource("16_mphxp")
+colourMap = ExtResource("17_whcvx")
 
 [node name="The Moon" parent="." index="2" instance=ExtResource("2_w7wlv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.44304e+08, -2.98979e+07, 3.1476e+08)
@@ -40,3 +111,5 @@ InitVel = Vector3(8000, -0.765, 0.5)
 transform = Transform3D(0.99945, 0.0331552, 3.15175e-08, -0.014742, 0.444391, 0.895712, 0.0296975, -0.895219, 0.444635, 226683, 2.82721e+06, -5.71384e+06)
 InitPos = Vector3(226653, 2.82681e+06, -5.71303e+06)
 InitVel = Vector3(20, 5, 0)
+
+[editable path="-- Mesh comp --/Terrain2"]
